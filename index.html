@@ -10,12 +10,13 @@
 <style>
   :root {
     --card-bg: rgba(255, 255, 255, 0.06);
-    --accent: #ff4d6d;
-    --text-light: #fff5f6;
+    --accent: #ffffff; /* تم تحويل اللون الأساسي للنصوص للأبيض */
+    --text-light: #ffffff; /* تم تحويل النصوص للون الأبيض الخالص */
   }
 
   body {
-    background: linear-gradient(135deg, #000000, #8b0000); /* برا: أسود في أحمر */
+    /* المزيج الجديد: أسود ملكي مدمج مع أرجواني داكن فخم */
+    background: linear-gradient(135deg, #000000, #1f0d2b, #000000); 
     font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
     text-align: center;
     color: var(--text-light);
@@ -31,14 +32,14 @@
     transition: background 0.8s ease-in-out;
   }
 
-  /* تحويل الخلفية لعنابي خفيف بالداخل */
+  /* الحفاظ على نفس التدرج الفخم بعد تسجيل الدخول */
   body.logged-in {
-    background: linear-gradient(135deg, #5c0011, #2b0006) !important;
+    background: linear-gradient(135deg, #0d0414, #000000) !important;
   }
 
   .heart {
     position: absolute;
-    color: var(--accent);
+    color: #ff4d6d; /* الحفاظ على لون القلوب المتساقطة أحمر ليبرز فوق الخلفية الداكنة */
     font-size: 20px;
     animation: fall linear forwards;
     opacity: 0.7;
@@ -57,7 +58,7 @@
     -webkit-backdrop-filter: blur(15px);
     padding: 40px 25px;
     border-radius: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.08);
     max-width: 450px;
     width: 85%;
@@ -69,12 +70,14 @@
   h1, h2 { 
     font-family: 'Reem Kufi', sans-serif; 
     margin-top: 0; 
-    color: var(--text-light); 
-    text-shadow: 0 0 15px rgba(255, 77, 109, 0.4); 
+    color: #ffffff !important; /* جعل الكلام والتاريخ بالعلّو أبيض */
+    text-shadow: none; 
   }
   h1 { font-size: 2.6rem; font-weight: 700; }
-  h2 { font-size: 1.7rem; color: var(--accent); margin-bottom: 8px; font-weight: 500; }
-  p { font-size: 1.15rem; line-height: 1.7; color: #ffd0d6; font-weight: 400; }
+  h2 { font-size: 1.7rem; margin-bottom: 8px; font-weight: 500; }
+  
+  /* تعديل خط الفقرة السفلي ليصبح أبيض واضح */
+  p { font-size: 1.15rem; line-height: 1.7; color: #ffffff !important; font-weight: 400; }
 
   .input-group { position: relative; max-width: 280px; margin: 25px auto; }
   input {
@@ -83,7 +86,7 @@
     color: white; outline: none; box-sizing: border-box; transition: 0.3s; text-align: center;
     font-family: 'Cairo', sans-serif;
   }
-  input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 77, 109, 0.5); }
+  input:focus { border-color: #ff4d6d; box-shadow: 0 0 15px rgba(255, 77, 109, 0.5); }
 
   button {
     padding: 14px 45px; border: none; border-radius: 50px; font-size: 18px;
@@ -97,12 +100,26 @@
   .main { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .main.show { display: block; opacity: 1; transform: translateY(0); }
 
-  .timer-container { margin: 25px 0; background: rgba(0, 0, 0, 0.3); padding: 18px; border-radius: 20px; border: 1px solid rgba(255, 77, 109, 0.15); }
-  .timer-title { font-size: 1rem; color: #ffb3c1; margin-bottom: 12px; font-weight: 600; }
+  /* المربع الداخلي الخاص بالعداد أصبح باللون الأبيض */
+  .timer-container { 
+    margin: 25px 0; 
+    background: #ffffff !important; /* اللون الأبيض للمربع */
+    padding: 18px; 
+    border-radius: 20px; 
+    border: none; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* عنوان المربع الداخلي تم تعديل لونه ليظهر بوضوح فوق الأبيض */
+  .timer-title { font-size: 1rem; color: #333333 !important; margin-bottom: 12px; font-weight: 600; }
   .countdown { display: flex; justify-content: space-around; direction: ltr; }
   .time-box { text-align: center; flex: 1; }
-  .time-num { font-size: 1.6rem; font-weight: bold; color: var(--accent); display: block; text-shadow: 0 0 10px rgba(255, 77, 109, 0.3); }
-  .time-label { font-size: 0.8rem; color: #ffd0d6; font-weight: 600; }
+  
+  /* الأرقام داخل المربع أصبحت باللون الأسود */
+  .time-num { font-size: 1.6rem; font-weight: bold; color: #000000 !important; display: block; text-shadow: none; }
+  
+  /* تسميات الوقت (يوم، ساعة...) تم تلوينها بلون داكن لتتناسب مع المربع الأبيض */
+  .time-label { font-size: 0.8rem; color: #555555 !important; font-weight: 600; }
 
   .music { margin-top: 25px; }
   audio { filter: invert(1) hue-rotate(180deg) brightness(1.2); border-radius: 30px; width: 100%; max-width: 280px; }
@@ -197,4 +214,5 @@ function openSite() {
 </script>
 </body>
 </html>
+
 
